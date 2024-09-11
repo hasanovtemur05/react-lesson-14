@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+      "esbenp.prettier-vscode",         // Prettier - Kod formatlashi uchun
+      "dbaeumer.vscode-eslint",         // ESLint - JavaScript linteri
+      "rodrigovallades.es7-react-js-snippets",  // React uchun kod snippetlari
+      "formulahendry.auto-rename-tag",  // HTML va JSX teglari uchun avto nomlash
+      "coenraads.bracket-pair-colorizer-2" // Qavslarni ranglash
+    ]
+  }
+  
