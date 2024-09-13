@@ -19,22 +19,23 @@ const style = {
   p: 4,
 };
 
-export default function TeacherModal({ open, handleClose, setData, data, setOpen, editingTeacher }) {
+export default function CourseModal({ open, handleClose, setData, data, setOpen, editingCourse }) {
   const [form, setForm] = useState({});
 
   // Modal ochilganda formani tahrir qilish yoki yangi ma'lumot qo'shish
   useEffect(() => {
     if (open) {
-      if (editingTeacher?.id) {
+      if (editingCourse?.id) {
         setForm({
-          name: editingTeacher.name || "",
-          course: editingTeacher.course || "",
+          name: editingCourse.name || "",
+          duration: editingCourse.duration || "",
+          price: editingCourse.price || "",
         });
       } else {
-        setForm({ name: "", course: "" });
+        setForm({ name: "", duration: "", price: "" });
       }
     }
-  }, [open, editingTeacher]);
+  }, [open, editingCourse]);
 
   // Formdagi input o'zgarishini kuzatish
   const handleChange = (event) => {
@@ -46,11 +47,11 @@ export default function TeacherModal({ open, handleClose, setData, data, setOpen
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (editingTeacher?.id) {
-        const res = await axios.put(`http://localhost:3000/teacher/${editingTeacher.id}`, form);
-        setData(data.map((item) => (item.id === editingTeacher.id ? res.data : item)));
+      if (editingCourse?.id) {
+        const res = await axios.put(`http://localhost:3000/course/${editingCourse.id}`, form);
+        setData(data.map((item) => (item.id === editingCourse.id ? res.data : item)));
       } else {
-        const res = await axios.post("http://localhost:3000/teacher", form);
+        const res = await axios.post("http://localhost:3000/course", form);
         setData([...data, res.data]);
       }
       setOpen(false);
@@ -63,12 +64,12 @@ export default function TeacherModal({ open, handleClose, setData, data, setOpen
     <Modal open={open} onClose={handleClose} aria-labelledby="keep-mounted-modal-title" aria-describedby="keep-mounted-modal-description">
       <Box sx={style}>
         <Typography id="keep-mounted-modal-title" align="center" variant="h6" component="h2">
-          {editingTeacher?.id ? "Edit Teacher" : "Add Teacher"}
+          {editingCourse?.id ? "Edit Course" : "Add Course"}
         </Typography>
 
         <TextField
           fullWidth
-          label="Teacher Name"
+          label="Course Name"
           name="name"
           value={form.name || ""}
           onChange={handleChange}
@@ -76,14 +77,22 @@ export default function TeacherModal({ open, handleClose, setData, data, setOpen
         />
         <TextField
           fullWidth
-          label="Course"
-          name="course"
-          value={form.course || ""}
+          label="Duration"
+          name="duration"
+          value={form.duration || ""}
+          onChange={handleChange}
+          sx={{ marginY: "15px" }}
+        />
+        <TextField
+          fullWidth
+          label="Price"
+          name="price"
+          value={form.price || ""}
           onChange={handleChange}
           sx={{ marginY: "15px" }}
         />
         <Button variant="contained" color="success" onClick={handleSubmit}>
-          {editingTeacher?.id ? "Update" : "Save"}
+          {editingCourse?.id ? "Update" : "Save"}
         </Button>
       </Box>
     </Modal>

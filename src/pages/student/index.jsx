@@ -12,7 +12,7 @@ const StudentPage = () => {
   const [editingStudent, setEditingStudent] = useState({}); 
 
   useEffect(() => {
-    // Fetch student data
+    // student data
     axios
       .get('http://localhost:3000/student')
       .then((res) => {
@@ -22,7 +22,7 @@ const StudentPage = () => {
         console.error('Error fetching student data: ', error);
       });
 
-    // Fetch course data
+    // course data
     axios
       .get('http://localhost:3000/course')
       .then((res) => {
@@ -32,7 +32,7 @@ const StudentPage = () => {
         console.error('Error fetching course data: ', error);
       });
 
-    // Fetch teacher data
+    // teacher data
     axios
       .get('http://localhost:3000/teacher')
       .then((res) => {

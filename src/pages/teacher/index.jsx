@@ -1,52 +1,50 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { TeacherTable, TeacherModal } from '@components';
-import Button from '@mui/material/Button';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { TeacherTable, TeacherModal } from "@components";
+import Button from "@mui/material/Button";
 
-const Index = () => {
-  const [data, setData] = useState([]); 
-  const [course, setCourse] = useState([]); 
-  const [open, setOpen] = useState(false);
-  const [editingCourse, setEditingCourse] = useState({}); 
+const Teacher = () => {
+  const [data, setData] = useState([]); // O'qituvchilar ro'yxati
+  const [open, setOpen] = useState(false); // Modalni ochish uchun
+  const [editingTeacher, setEditingTeacher] = useState({}); // Tahrirlash uchun o'qituvchi
 
+  // O'qituvchilarni olish uchun useEffect hook
   useEffect(() => {
     axios
-      .get('http://localhost:3000/teacher')
+      .get("http://localhost:3000/teacher")
       .then((res) => {
         setData(res?.data);
       })
       .catch((error) => {
-        console.error('Error fetching teacher data: ', error);
+        console.error("Error fetching teacher data: ", error);
       });
-  }, []); 
+  }, []);
 
+  // Modalni yopish funksiyasi
   const handleClose = () => {
     setOpen(false);
-    setEditingCourse({});
+    setEditingTeacher({}); // Modal yopilganda tahrirlashni tozalash
   };
 
-  const openModal = async () => {
-    try {
-      const res = await axios.get('http://localhost:3000/course');
-      setCourse(res?.data);
-      setOpen(true); 
-    } catch (error) {
-      console.error('Error fetching course data: ', error);
-    }
+  // Modalni ochish funksiyasi (yangi o'qituvchi qo'shish yoki tahrirlash)
+  const openModal = () => {
+    setOpen(true);
   };
 
+  // O'qituvchini o'chirish funksiyasi
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/teacher/${id}`);
       setData((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
-      console.error('Error deleting teacher: ', error);
+      console.error("Error deleting teacher: ", error);
     }
   };
 
+  // Tahrirlash tugmasini bosganda chaqiriladigan funksiyasi
   const handleEdit = (id) => {
     const teacher = data.find((item) => item.id === id);
-    setEditingCourse(teacher);
+    setEditingTeacher(teacher);
     openModal();
   };
 
@@ -58,15 +56,14 @@ const Index = () => {
         data={data}
         setData={setData}
         setOpen={setOpen}
-        course={course}
-        editingCourse={editingCourse}
+        editingTeacher={editingTeacher}
       />
-      <Button variant="contained" sx={{ marginBottom: '20px' }} onClick={openModal}>
-        Open Modal
+      <Button variant="contained" sx={{ marginBottom: "20px" }} onClick={openModal}>
+        Add Teacher
       </Button>
       <TeacherTable data={data} onEdit={handleEdit} onDelete={handleDelete} />
     </div>
   );
 };
 
-export default Index;
+export default Teacher;

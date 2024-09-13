@@ -9,14 +9,14 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
-export default function TeacherTable({ data, onEdit, onDelete }) {
+export default function GroupTable({ data, onEdit, onDelete }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="center">T/R</TableCell>
-            <TableCell align="center">Teacher Name</TableCell>
+            <TableCell align="center">Group Name</TableCell>
             <TableCell align="center">Course Name</TableCell>
             <TableCell align="center">Action</TableCell>
           </TableRow>

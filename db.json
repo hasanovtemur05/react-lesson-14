@@ -8,13 +8,22 @@
       "course": "Standart Backend",
       "teacher": "admin",
       "group": "Bootcamp frontend react js N11"
+    },
+    {
+      "id": "821c",
+      "name": "admin",
+      "age": "12",
+      "phone": "+998938051615",
+      "course": "Standart Backend",
+      "teacher": "Kimdir",
+      "group": "Bootcamp frontend react js N11"
     }
   ],
   "teacher": [
     {
-      "id": "85a5",
-      "name": "admin",
-      "course": "Standart Backend"
+      "id": "12sdcs",
+      "name": "Kimdir",
+      "course": "Bootcamp Frontend"
     }
   ],
   "group": [
@@ -28,8 +37,8 @@
     {
       "id": "f95e",
       "name": "Standart Backend",
-      "duration": "zsczsz",
-      "price": "1200zscz"
+      "duration": "8-oy",
+      "price": "130$"
     }
   ]
 }

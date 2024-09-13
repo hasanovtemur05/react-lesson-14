@@ -27,11 +27,6 @@ const Index = () => {
         <Route path="student-layout" element={<StudentLayout/>}>
         
         </Route>
-
-
-         
-
-
       </Route>
     )
   );
